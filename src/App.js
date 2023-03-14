@@ -1,12 +1,19 @@
+import React from 'react';
 import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Home from './pages/Home';
+import CreateUser from './pages/CreateUser';
+import Administration from './pages/Administration';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello traveler!</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/createuser" element={<CreateUser/>}/>
+        <Route path="/administration" element={<Administration/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

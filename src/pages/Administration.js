@@ -1,14 +1,13 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 
-const Home = () => {
+const Administration = () => {
     return (
-        
         <div>
-            <Navigation/> 
-            <h1>Accueil</h1>
+            <Navigation/>
+            <h1>Administration</h1>
         </div>
     );
 };
 
-export default Home;
+export default Administration;
