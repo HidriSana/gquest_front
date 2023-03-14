@@ -2,15 +2,19 @@ import React from 'react';
 import { useState } from "react";
 
 const CreateUser = () => {
-    const [name, setName] = useState("");
+    const [lastname, setLastname] = useState("");
+	const [firstname, setFirstname] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	//const [message, setMessage] = useState("");
     
     const handleChange = (e) => {
 		switch (e.target.id) {
-			case 'nom':
-				setName(e.target.value);
+			case 'lastname':
+				setLastname(e.target.value);
+				break;
+				case 'firstname':
+				setFirstname(e.target.value);
 				break;
 			case 'email':
 				setEmail(e.target.value);
@@ -23,7 +27,8 @@ const CreateUser = () => {
 	}
     const submit = () => {
 		let datas = {
-			name: name,
+			lastname: lastname,
+			firstname: firstname,
 			email: email,
 			password: password
 		};
@@ -42,7 +47,8 @@ const CreateUser = () => {
 			.then((response) => response.json())
 			.then((response) => {
 				if(response.message === ""){
-					setName("");
+					setLastname("");
+					setFirstname("");
 					setEmail("");
 					setPassword("");
 				} 
@@ -55,15 +61,19 @@ const CreateUser = () => {
             <h1>Créer votre compte utilisateur</h1>
             <form>
 				<div>
-					<label htmlFor="nom">Votre nom</label>
-					<input type="text" id="nom" value={name}  onChange={handleChange} />
+					<label htmlFor="lastname">Nom:</label>
+					<input type="text" id="lastname" value={lastname}  onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="email">Votre email</label>
+					<label htmlFor="firstname">Prénom:</label>
+					<input type="text" id="firstname" value={firstname}  onChange={handleChange} />
+				</div>
+				<div>
+					<label htmlFor="email">Email:</label>
 					<input type="email" id="email" value={email}  onChange={handleChange}/>
 				</div>
 				<div>
-					<label htmlFor="password">Votre mot de passe</label>
+					<label htmlFor="password">Mot de passe:</label>
 					<input type="password" id="password" value={password}  onChange={handleChange}/>
 				</div>
 				<button className="btn" type="button" onClick={submit}>
