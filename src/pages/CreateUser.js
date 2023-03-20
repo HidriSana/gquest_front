@@ -33,7 +33,7 @@ const CreateUser = () => {
 			password: password
 		};
 		
-		let req = new Request("http://localhost:3000/createuser", 
+		let req = new Request("http://localhost:5000/createuser", 
 			{
 				method: "POST",
 				body: JSON.stringify(datas),
@@ -58,27 +58,39 @@ const CreateUser = () => {
     
     return (
         <div>
-            <h1>Créer votre compte utilisateur</h1>
             <form>
-				<div>
-					<label htmlFor="lastname">Nom:</label>
-					<input type="text" id="lastname" value={lastname}  onChange={handleChange} />
-				</div>
-				<div>
-					<label htmlFor="firstname">Prénom:</label>
-					<input type="text" id="firstname" value={firstname}  onChange={handleChange} />
-				</div>
-				<div>
-					<label htmlFor="email">Email:</label>
-					<input type="email" id="email" value={email}  onChange={handleChange}/>
-				</div>
-				<div>
-					<label htmlFor="password">Mot de passe:</label>
-					<input type="password" id="password" value={password}  onChange={handleChange}/>
-				</div>
+				<fieldset>
+					<legend>Créez votre compte d'utilistaeur</legend>
+					<div>
+						<label htmlFor="lastname">Nom:</label>
+						<input type="text" id="lastname" value={lastname}  onChange={handleChange} />
+					</div>
+					<div>
+						<label htmlFor="firstname">Prénom:</label>
+						<input type="text" id="firstname" value={firstname}  onChange={handleChange} />
+					</div>
+					<div>
+						<label htmlFor="email">Email:</label>
+						<input type="email" id="email" value={email}  onChange={handleChange}/>
+					</div>
+					<div>
+						<label htmlFor="password">Mot de passe:</label>
+						<input type="password" id="password" value={password}  onChange={handleChange}/>
+					</div>
+					
+				</fieldset>
+				<fieldset>
+					<legend>Guilde</legend>
+					<p>Avez-vous une guilde?</p>
+					<input type="radio" name="guild" value="haveGuild"/>J'ai déjà une guilde
+     				<input type="radio" name="guild" value="notYet"/>Je n'ai pas encore de guilde
+				</fieldset>
 				<button className="btn" type="button" onClick={submit}>
-					Créer un compte
+						Créer mon compte
 				</button>
+				<p>
+					<a href="/login">J'ai déjà un compte</a>
+				</p>
 			</form>
         </div>
     );
