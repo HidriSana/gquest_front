@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react";
+import Navigation from '../components/Navigation';
 
 const CreateUser = () => {
     const [lastname, setLastname] = useState("");
@@ -58,6 +59,7 @@ const CreateUser = () => {
     
     return (
         <div>
+			<Navigation/>
             <form>
 				<fieldset>
 					<legend>Créez votre compte d'utilistaeur</legend>
