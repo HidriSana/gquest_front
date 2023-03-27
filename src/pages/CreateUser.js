@@ -68,6 +68,7 @@ const CreateUser = () => {
 		setError('');
 	}, [email, password])
 
+	//C'est le moment de tout envoyer  à la base de données ;)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		//Si par malheur, l'utilisateur arrive à cliquer sur le bouton submit, qui est supposé être désactivé si tous les champs ne sont pas correctement remplis, les lignes ci-dessous vont faire qu'il reçoive un autre message d'erreur lui rappelant de bien remplir le formulaire. Il ne va rien envoyer à la base de données également
@@ -103,15 +104,8 @@ const CreateUser = () => {
 					setError ("L'inscription a échoué")
 				}
 				errRef.current.focus(); //un focus sur l'erreur
-
 		}
-
-
-		
-		
 	}
-
-
     
     return (
 		<>
@@ -128,7 +122,6 @@ const CreateUser = () => {
             <form onSubmit={handleSubmit}>
 				<fieldset>
 					<legend>Créez votre compte d'utilistaeur</legend>
-						<div>
 							<label htmlFor="lastname">Nom:
 								<FontAwesomeIcon icon={faCheck} className={validLastname? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validLastname || !lastname ? "hide" : "invalid"}/>
@@ -150,8 +143,7 @@ const CreateUser = () => {
 								Votre nom ne doit pas contenir de nombres.
 								Sa longueur doit ête comprise entre  2 et  30 caractères.
 							</p>
-						</div>		
-						<div>
+				
 							<label htmlFor="firstname">Prénom:
 								<FontAwesomeIcon icon={faCheck} className={validFirstname? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validFirstname || !firstname ? "hide" : "invalid"}/>
@@ -172,7 +164,6 @@ const CreateUser = () => {
 								Votre prénom ne doit pas contenir de nombres.
 								Sa longueur doit ête comprise entre  2 et  30 caractères.
 							</p>
-						</div>
 						<div>
 							<label htmlFor="email">Email:
 								<FontAwesomeIcon icon={faCheck} className={validEmail? "valid" : "hide"} />
