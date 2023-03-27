@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRef, useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Navigation from '../components/Navigation';
 //import { useDispatch } from 'react-redux';
 //const axios = require('axios'); // Ceci est une définiton : Axios est un client HTTP basé sur les promesses compatible avec node.js et les navigateurs. Il est isomorphique (c’est à dire qu’il peut opérer dans le navigateur et dans node.js avec le même code).
 
@@ -49,6 +50,7 @@ const Login = () => {
    
     return (
 		<>
+			<Navigation/>
 			{success ? (
 				<section>
 					<h1>Vous êtes maintenant connecté</h1>

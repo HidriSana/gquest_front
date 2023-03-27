@@ -4,7 +4,7 @@ import Login from './Login'
 
 const Home = () => {
     return (
-        <div>
+        <div  className='App'>
             <Navigation/> 
             <h1>Accueil</h1>
             <Login/>
