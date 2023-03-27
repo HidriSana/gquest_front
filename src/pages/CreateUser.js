@@ -87,7 +87,6 @@ const CreateUser = () => {
 					headers: {'Content-Type': 'application/json' },
 				});
 				console.log(response?.data);
-				//console.log(response?.privateKey);
 				console.log(JSON.stringify(response));
 				setSuccess(true);
 				setLastname('');

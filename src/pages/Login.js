@@ -1,9 +1,9 @@
 import {useRef, useState, useEffect, useContext} from 'react';
-import AuthContext from './context/AuthProvide'
+import AuthContext from '../context/AuthProvider';
+import axios from '../api/axios';	
 import {useNavigate} from 'react-router-dom';
 
-//import { useDispatch } from 'react-redux';
-//const axios = require('axios'); // Ceci est une définiton : Axios est un client HTTP basé sur les promesses compatible avec node.js et les navigateurs. Il est isomorphique (c’est à dire qu’il peut opérer dans le navigateur et dans node.js avec le même code).
+const LOGIN_URL = '/login';
 
 const Login = () => {
 	const {setAuth} = useContext(AuthContext)
@@ -29,11 +29,34 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-		setSuccess(true)
-		setEmail('');
-		setPassword('');
-		setSuccess(true);
-		navigate('/tableau-de-bord'); // Définition de la page vers laquelle va être redirigé l'utilisateur une fois authentifié avec succès
+		try {
+			const response = await axios.post(LOGIN_URL, 
+				JSON.stringify({email, password}),
+				{
+					headers: {'Content-Type': 'application/json' },
+				})
+			console.log(JSON.stringify(response?.data));
+			const token = response?.data?.token;
+			//const roles = response?.data?.roles  --> A mettre en place une fois les rôles sont définis
+			setAuth({email, password, token}); //Il faut également passer les roles ici une fois que c'est mis en place 
+			setEmail('');
+			setPassword('');
+			setSuccess(true);
+			navigate('/tableau-de-bord'); // Définition de la page vers laquelle va être redirigé l'utilisateur une fois authentifié avec succès
+		} catch (error) {
+			if (!error?.response) {
+                setError('Le serveur ne répond pas');
+            } else if (error.response?.status === 400) {
+                setError('Vous devez saisir le login et le mot de passe pour vous connecter');
+            } else if (error.response?.status === 401) {
+                setError('Non authorisé');
+            } else {
+                setError("L'authentification a échoué");
+            }
+            errRef.current.focus(); //Il faut que le lecteur d'écran puisse lire le message d'erreur s'il y en a 
+		}
+
+		
 	}
    //En ce qui concerne les balises <section></section>, elles remplacent  les div par défaut de REACT  pour la sémantique
 	return (
