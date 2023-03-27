@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
-import axios from './api/axios'; //axios a déjà été importé de sa dépendance dans axios.js--> Voir dossier api.   
-//import{useNavigate} from "react-router-dom";	
+import axios from '../api/axios'; //axios a déjà été importé de sa dépendance dans axios.js--> Voir dossier api.   
 import Navigation from '../components/Navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";//C'est une dépendance à installer à part. Vous pouvez la consulter dans la documentation officielle de React
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"; //Je n'importe que les icones dont j'ai besoin ici
@@ -10,7 +9,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 const USER_REGEX = /^[A-zÀ-ú]{2,30}$/ ; //-> Regex est pour autoriser les noms et prénom avec accents, et en limiter la longueur
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ; //-> Ceci est un regex pour le format mail
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/; // -> Ceci est un regex identique à celui du validateur sequelize
-//const LOGIN_URL = '/login';
+const REGISTER_URL = '/createuser';
 
 const CreateUser = () => {
 	const userRef = useRef(); //le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surtout l'utiliser pour le focus 
@@ -36,12 +35,11 @@ const CreateUser = () => {
 	const [success, setSuccess] = useState(false)
 
 	
-	
-	//const navigate = useNavigate(); 
 
 	useEffect(() => {
 		userRef.current.focus();
 	}, [])
+
 	//C'est là qu'interviendra  le regex défini plus haut, dès que l'utilistaeur écrit quelque chose dans le champ email
 	useEffect (() => {
 		const result = EMAIL_REGEX.test(email);
@@ -81,10 +79,36 @@ const CreateUser = () => {
             setError("Les champs n'ont pas été remplis correctement");
             return;
         }
+		try {
+			const response= await axios.post(REGISTER_URL,
+				JSON.stringify({lastname, firstname, email, password}),
+				{
+					headers: {'Content-Type': 'application/json' },
+				});
+				console.log(response?.data);
+				//console.log(response?.privateKey);
+				console.log(JSON.stringify(response));
+				setSuccess(true);
+				setLastname('');
+				setFirstname('');
+				setEmail('');
+				setPassword('');
+				
+			} catch (err) {
+				if(!err?.response) {
+					setError('Le serveur ne répond pas')
+				} else if (err.response?.status === 409) {
+					setError ('Cette adresse mail est associée à un autre compte utilisateur')
+				} else  {
+					setError ("L'inscription a échoué")
+				}
+				errRef.current.focus(); //un focus sur l'erreur
 
-		console.log(lastname, firstname, email, password);
-		setSuccess(true);
-		//navigate('/tableau-de-bord');
+		}
+
+
+		
+		
 	}
 
 
