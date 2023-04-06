@@ -90,6 +90,10 @@ padding: 0.5rem;
   display: none;
 }
 
+.show {
+  display: default;
+}
+
 .valid {
   color: limegreen;
   margin-left: 0.25rem;
