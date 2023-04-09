@@ -97,6 +97,9 @@ const Login = () => {
 					<p>
 						<a href="/createuser">Je veux m'inscrire</a>
 					</p>
+					<p>
+						<a href="/">Retour à l'accueil</a>
+					</p>
 				</form>
 			</section>
 			)}

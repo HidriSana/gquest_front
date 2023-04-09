@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";//C'est une dé
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"; //Je n'importe que les icones dont j'ai besoin ici
 
 //Même si j'ai défini les règles de validation sur Sequelize , il est de bonne pratique, de poser également des contraintes sur le front, afin que l'utilistauer ait un message d'erreur , avant même qu'il ne clique sur Submit
-const USER_REGEX = /^[A-zÀ-ú]{2,30}$/ ; //-> Regex est pour autoriser les noms et prénom avec accents, et en limiter la longueur
+const USER_REGEX = /^[A-zÀ-ú]{2,30}$/ ; //-> Regex pour autoriser les noms et prénom avec accents, et en limiter la longueur
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ; //-> Ceci est un regex pour le format mail
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/; // -> Ceci est un regex identique à celui du validateur sequelize
-const REGISTER_URL = '/create-user-and-guild';
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/; // -> Ceci est un regex identique à celui du validateur sequelize 
+const REGISTER_URL = '/create-user-not-guild';
 
 const CreateUser = () => {
 	const userRef = useRef(); //le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surtout l'utiliser pour le focus 
@@ -30,11 +30,14 @@ const CreateUser = () => {
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword ]= useState(false)
 	const [passwordFocus, setPasswordFocus] = useState(false)
+
+    const [guild, setGuild] = useState("");
+	const [validGuild, setValidGuild]= useState(false)
+	const [guildFocus, setGuildFocus] = useState(false)
 	
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
 
-	
 
 	useEffect(() => {
 		userRef.current.focus();
@@ -63,10 +66,15 @@ const CreateUser = () => {
 		setValidFirstname(result);
 	}, [firstname])
 
+    useEffect (() => {
+		setValidGuild();
+	}, [guild])
+
+
 	//Avec ce useEffect ,  le message d'erreur  va disparaitre à chaque fois que l'utilistauer change le statut de l'input qui a généré l'erreur
 	useEffect (() => {
 		setError('');
-	}, [lastname, firstname, email, password])
+	}, [lastname, firstname, email, password, guild])
 
 	//C'est le moment de tout envoyer  à la base de données ;)
 	const handleSubmit = async (e) => {
@@ -76,13 +84,13 @@ const CreateUser = () => {
 		const v2 = USER_REGEX.test(firstname);
         const v3 = PASSWORD_REGEX.test(password);
 		const v4 = EMAIL_REGEX.test(email);
-        if (!v1 || !v2 || !v3 || !v4 ) {
+        if (!v1 || !v2 || !v3 || !v4) {
             setError("Les champs n'ont pas été remplis correctement");
             return;
         }
 		try {
 			const response= await axios.post(REGISTER_URL,
-				JSON.stringify({lastname, firstname, email, password}),
+				JSON.stringify({lastname, firstname, email, password, guild}),
 				{
 					headers: {'Content-Type': 'application/json' },
 				});
@@ -93,12 +101,13 @@ const CreateUser = () => {
 				setFirstname('');
 				setEmail('');
 				setPassword('');
+				setGuild('');
 				
 			} catch (err) {
 				if(!err?.response) {
 					setError('Le serveur ne répond pas')
 				} else if (err.response?.status === 409) {
-					setError ('Cette adresse mail est associée à un autre compte utilisateur')
+					setError ('Ce nom ou adresse mail sont déjà pris')
 				} else  {
 					setError ("L'inscription a échoué")
 				}
@@ -112,7 +121,8 @@ const CreateUser = () => {
 		{success? (
 			<section>
 				<h1>Bravo!Vous vous êtes incrit avec succès.</h1> 
-				<p>Vous pouvez maintenant vous <a href="/login">connecter</a></p>
+				<p>Une demande de validation de votre adhésion a été envoyée à l'administrateur de la guilde.</p>
+				<p><a href="/">Retour à l'accueil</a></p>
 			</section>
 		) :(
 
@@ -125,7 +135,6 @@ const CreateUser = () => {
 							<label htmlFor="lastname">Nom:
 								<FontAwesomeIcon icon={faCheck} className={validLastname? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validLastname || !lastname ? "hide" : "invalid"}/>
-							<label/>
 							</label>
 							<input 	type="text" 
 									id="lastname" 
@@ -206,13 +215,36 @@ const CreateUser = () => {
 								Le mot de passe doit contenir 8 caractères au minimum, 12 au maximum, incluant au moins une majuscule, un chiffre et un caractère spécial.   
 							</p>
 						</div>
+                        <p></p>
+                        <label htmlFor="guild">Entrez le nom de votre guilde:
+								<FontAwesomeIcon icon={faCheck} className={validGuild? "valid" : "hide"} />
+								<FontAwesomeIcon icon={faTimes} className={validGuild || !guild ? "hide" : "invalid"}/>
+							</label>
+							<input 	type="text" 
+									id="guild" 
+									value={guild} 
+									ref={userRef} 
+									onChange={(e) => setGuild(e.target.value)} 
+									required
+									aria-invalid={validGuild? "false" : "true"}
+									aria-describedby="guildnote"
+									onFocus= {() => setGuildFocus(true)}
+									onBlur= {() => setGuildFocus(false)}
+							/>
+							<p id="guildnote" className={guildFocus && guild && !validGuild ? "instructions" : "offscreen"}>
+								<FontAwesomeIcon icon={faInfoCircle} />
+								Cette guilde n'existe pas. 
+							</p>
+				
+
+                        
 				</fieldset>
 				
-				<button disabled={!validEmail || !validPassword || !validLastname || !validFirstname ? true : false}>
+				<button disabled={!validEmail || !validPassword || !validLastname || !validFirstname || !validGuild ? true : false}>
 						Créer mon compte
 				</button>
                 <p>
-					<a href="/create-user-and-guild">Je n'ai pas de guilde</a>
+					<a href="/create-user-and-guild">Je n'ai pas encore de guilde</a>
 				</p>
 				<p>
 					<a href="/login">J'ai déjà un compte</a>
