@@ -1,7 +1,17 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 
-const TableauDeBord = () => {
+const dashBoard = () => {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return (
         <div>
             <Navigation/>
@@ -10,4 +20,4 @@ const TableauDeBord = () => {
     );
 };
 
-export default TableauDeBord;
+export default dashBoard;

@@ -6,13 +6,15 @@ import {useNavigate} from 'react-router-dom';
 const LOGIN_URL = '/login';
 
 const Login = () => {
+	//Si l'utilisateur se loggue  avec succès, on va setAuth et le stocker dans le contexte global. 
 	const {setAuth} = useContext(AuthContext)
-	const userRef = useRef(); //le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surotut l'utiliser pour le focus 
+	//le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surotut l'utiliser pour le focus 
+	const userRef = useRef(); 
 	const errRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-	const [error, setError] = useState("");
+	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
 	
 	//Le useNavigate va me servir  à passer à la page du tableau de bord des quêtes si succès d'authentification
@@ -36,9 +38,9 @@ const Login = () => {
 					headers: {'Content-Type': 'application/json' },
 				})
 			console.log(JSON.stringify(response?.data));
-			const token = response?.data?.token;
-			//const roles = response?.data?.roles  --> A mettre en place une fois les rôles sont définis
-			setAuth({email, password, token}); //Il faut également passer les roles ici une fois que c'est mis en place 
+			const accessToken = response?.data?.access;
+			const storedToken = localStorage.setItem('access', accessToken)
+			setAuth({email, password, storedToken});
 			setEmail('');
 			setPassword('');
 			setSuccess(true);
@@ -46,9 +48,9 @@ const Login = () => {
 		} catch (error) {
 			if (!error?.response) {
                 setError('Le serveur ne répond pas');
-            } else if (error.response?.status === 400) {
-                setError('Vous devez saisir le login et le mot de passe pour vous connecter');
             } else if (error.response?.status === 401) {
+                setError('Vous devez saisir le login et le mot de passe pour vous connecter');
+            } else if (error.response?.status === 400) {
                 setError('Non authorisé');
             } else {
                 setError("L'authentification a échoué");
@@ -67,7 +69,7 @@ const Login = () => {
 				</section>
 			):(
 			<section>
-				<p ref={errRef} className={error ? "errmsg" : "offscreen"} aria-live="assertive">{error}</p>
+				<p ref={errRef} className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
 				<form onSubmit={handleSubmit} >
 						
 					<fieldset>
