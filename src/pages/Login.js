@@ -3,6 +3,7 @@ import AuthContext from '../context/AuthProvider';
 import axios from '../api/axios';	
 import {useNavigate} from 'react-router-dom';
 
+
 const LOGIN_URL = '/login';
 
 const Login = () => {
@@ -96,11 +97,8 @@ const Login = () => {
 
 						<button>Connexion</button>
 					</fieldset>
-					<p>
+					<p className="subscribe">
 						<a href="/createuser">Je veux m'inscrire</a>
-					</p>
-					<p>
-						<a href="/">Retour à l'accueil</a>
 					</p>
 				</form>
 			</section>

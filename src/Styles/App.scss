@@ -1,70 +1,101 @@
+@import './variables/variables.scss';
+/***************************  Standards *********************************/
 * {
   margin-left: auto;
   margin-right: auto;
-  padding: 0;
+  padding: 0.5rem;
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
+  font-size: 62.5%; 
   color: #fff;
+  scroll-behavior: smooth;
 }
 
-body {
-  min-height: 100vh;
-  background-color: #373737;
+/* Body */
+body { 
+    font-size: 1.6rem;
+    min-height: 100vh;
+    background-color: #373737;
 }
 
+/* Main container */
 .App {
 display: flex;
 flex-direction: column;
-justify-content: center;
 align-items: center;
 min-height: 100vh; 
-padding: 1rem 0.5rem;
+max-width: 980px;
+width: auto;
+margin: 0 auto;
 }
 
 section {
   width: 100%;
   max-width: 420px;
-  min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
+  justify-content: center;
+  padding: 0.5rem;
   background-color: rgba(0,0,0,0.4);
 }
-form {
+form{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-radius: 1rem ;
+}
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-radius: 1rem ;
 }
 
-a, a:visited {
-  color: #fff;
+fieldset legend {
+  color: lightgrey;
+  font-family:$playerFont;
+}
+
+
+a {
+  text-decoration:none;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="email"],
-button,
 textarea {
-font-family: 'Nunito', sans-serif;
-font-size: 22px;
-padding: 0.25rem;
-border-radius: 0.5rem;
+font-family: $playerFont;
+font-size: 1.5rem;
+padding: 1rem;
+border-radius: 1rem;
  }
-
-label,
-button {
-margin-top: 1rem;
+input::placeholder{
+  color:lightgray;
 }
 
-button {
-padding: 0.5rem;
+label{
+margin-top: 1rem;
+font-family:$playerFont;
+padding: 1rem;
+}
+form button {
+padding: 1rem;
+margin-top: 2rem;
+font-family: $playerFont;
+border-radius: 1rem;
+}
+
+form button:hover {
+  cursor: pointer;
+}
+
+li{
+ list-style: none;
 }
 
 .instructions {

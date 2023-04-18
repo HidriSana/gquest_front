@@ -1,4 +1,24 @@
+@import './variables/variables.scss';
 
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+.home h2 {
+    font-size: 1rem;
+    text-align: center;
+    font-family: $playerFont;
+}
+.home>*{
+    margin-bottom: 2rem;
+}
+.main-title {
+    font-family: $playerFont;
+    font-size: 5rem;
+    color: $gquestYellow;
+}
 .hero {
     display: flex;
     flex-direction: row;
@@ -8,8 +28,21 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 20%;
+    border-radius: 3rem;
 }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
+  form label{
+    margin-left: 0;
+}
+
+
+.subscribe a{
+ color: white;
+ font-family: $playerFont;
+}
+.subscribe a:visited {
+    color: $clickedLink;
+}
