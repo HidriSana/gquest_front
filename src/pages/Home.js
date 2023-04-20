@@ -13,7 +13,7 @@ const Home = () => {
             <h2>
                 Rejoins ta guilde, complète des quêtes, montre ta valeur et transforme tes points d'expérience en récompense
             </h2>
-            <div class = "hero">
+            <div className = "hero">
                 <img className='card' src="/svg/exclamation-mark-svgrepo-com.svg" alt="Exclamation mark for pending quest"/>
                 <img className='card' src="/svg/question-mark-svgrepo-com.svg" alt="Question mark for completing quest"/>
                 <img className='card' src="/svg/favorites-svgrepo-com.svg" alt="Star  for experience after completing a quest"/>

@@ -4,7 +4,6 @@ import '../Styles/Nav.scss'
 
 const Navigation = () => {
 
-
     return (
        <div className="navbar">
             <a className="main-title" href="/">GQUEST</a>

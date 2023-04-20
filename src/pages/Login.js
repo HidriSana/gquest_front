@@ -1,5 +1,5 @@
-import {useRef, useState, useEffect, useContext} from 'react';
-import AuthContext from '../context/AuthProvider';
+import {useRef, useState, useEffect} from 'react';
+import useAuth from '../hooks/useAuth';
 import axios from '../api/axios';	
 import {useNavigate} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const LOGIN_URL = '/login';
 
 const Login = () => {
 	//Si l'utilisateur se loggue  avec succès, on va setAuth et le stocker dans le contexte global. 
-	const {setAuth} = useContext(AuthContext)
+	const {setAuth} = useAuth()  //Le useAuth  utilise le AuthContext 
 	//le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surotut l'utiliser pour le focus 
 	const userRef = useRef(); 
 	const errRef = useRef();
@@ -16,11 +16,10 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
-	const [success, setSuccess] = useState(false);
 	
 	//Le useNavigate va me servir  à passer à la page du tableau de bord des quêtes si succès d'authentification
 	const navigate = useNavigate(); 
-	
+
 	//Le useEffect se joue lorsque le composant est monté
 	useEffect(() => {
 		userRef.current.focus();
@@ -40,11 +39,12 @@ const Login = () => {
 				})
 			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.access;
-			const storedToken = localStorage.setItem('access', accessToken)
-			setAuth({email, password, storedToken});
+			localStorage.setItem('access', accessToken)
+			const storedToken = localStorage.getItem('access')
+			const admin = response?.data?.admin; //Récupération du rôle du user  de la réponse json venant du back
+			setAuth({email, password, admin, storedToken}); //C'est ici que le AuthProvider commence à prendre place
 			setEmail('');
 			setPassword('');
-			setSuccess(true);
 			navigate('/tableau-de-bord'); // Définition de la page vers laquelle va être redirigé l'utilisateur une fois authentifié avec succès
 		} catch (error) {
 			if (!error?.response) {
@@ -63,12 +63,6 @@ const Login = () => {
 	}
    //En ce qui concerne les balises <section></section>, elles remplacent  les div par défaut de REACT  pour la sémantique
 	return (
-		<>	
-			{success ? (
-				<section>
-					<h1>Vous êtes maintenant connecté</h1>
-				</section>
-			):(
 			<section>
 				<p ref={errRef} className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
 				<form onSubmit={handleSubmit} >
@@ -102,8 +96,6 @@ const Login = () => {
 					</p>
 				</form>
 			</section>
-			)}
-		</>
     );
 }
 
