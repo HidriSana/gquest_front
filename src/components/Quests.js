@@ -9,7 +9,8 @@ const [data, setData] = useState([])
 useEffect (() => {
     axios
     .get('http://localhost:5000/quests',headerConfig)
-    .then((res) => setData(res.data.data))
+    .then((res) => 
+    setData(res.data.data))
 },[]);
 
 const beginQuest = async (quest) => {
@@ -31,9 +32,11 @@ const finishQuest = async (quest) => {
                 <div>
                     {data
                     .filter((quest)=> quest.status === 'en_attente')
-                    .map((quest, index) => (
-                        <div>
-                            <p key={index}>{quest.description}</p>
+                    .map((quest, i1) => (
+                        <div key={i1}>
+                            <p>{quest.description}</p>
+                            <p>Temps nécessaire estimé: {quest.duration} min</p>
+                            <p>Cette quête rapporte {quest.points} point(s)</p>
                             <button onClick={(e) => beginQuest(quest)} >S'assigner la quête</button>
                         </div>
                     ))}
@@ -45,9 +48,12 @@ const finishQuest = async (quest) => {
                 <div>
                     {data
                     .filter((quest)=> quest.status === 'en_cours')
-                    .map((quest, index) => (
-                        <div>
-                            <p key={index}>{quest.description}</p>
+                    .map((quest, i2) => (
+                        <div key={i2}>
+                            <p>{quest.description}</p>
+                            <p>Temps nécessaire estimé: {quest.duration} min</p>
+                            <p>Cette quête rapporte {quest.points} point(s)</p>
+                            <p>{quest.user_id} est dessus</p>
                             <button onClick={(e) => finishQuest(quest)} >J'ai fini!</button>
                         </div>
                     ))}
@@ -58,9 +64,11 @@ const finishQuest = async (quest) => {
                 <div>
                     {data
                     .filter((quest)=> quest.status === 'terminée')
-                    .map((quest, index) => (
-
-                        <p key={index}>{quest.description}</p>
+                    .map((quest, i3) => (
+                        <div key={i3}>
+                            <p>{quest.description}</p>
+                            <p>{quest.user_id} a fini cette quête</p>
+                        </div>
                     ))}
                 </div>
            </div>  
