@@ -25,7 +25,7 @@ function App() {
             <Route path="/unauthorized" element={<Unauthorized/>}/>
             
           {/*Protected routes */}
-            <Route element={<authValidators.RequireAuth/>}>
+            <Route> {/*element={<authValidators.RequireAuth/> */}
               <Route path="/tableau-de-bord" element={<DashBoard/>}/>
             </Route>
             <Route element={<authValidators.RequireAdmin/>}>

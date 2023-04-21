@@ -5,3 +5,4 @@ import axios from 'axios' ; //Axios pour la liaison avec la bdd.
 export default axios.create({
     baseURL: 'http://localhost:5000'
 })
+
