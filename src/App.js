@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import CreateUserAndGuild from './pages/CreateUserAndGuild';
 import CreateUserAndFindGuild from './pages/CreateUserAndFindGuild';
 import Unauthorized from './pages/Unauthorized';
+import PendingRequest from './pages/PendingRequest';
 import Layout from './components/Layout';
 import authValidators from './components/RequireAuth';
 import {Routes, Route} from "react-router-dom";
@@ -23,9 +24,10 @@ function App() {
             <Route path="/create-user-and-guild" element={<CreateUserAndGuild/>}/>
             <Route path="/create-user-find-guild" element={<CreateUserAndFindGuild/>}/>
             <Route path="/unauthorized" element={<Unauthorized/>}/>
+            <Route path="/pending-request" element={<PendingRequest/>}/>
             
           {/*Protected routes */}
-            <Route> {/*element={<authValidators.RequireAuth/> */}
+            <Route element={<authValidators.RequireAuth/>}> 
               <Route path="/tableau-de-bord" element={<DashBoard/>}/>
             </Route>
             <Route element={<authValidators.RequireAdmin/>}>

@@ -1,5 +1,4 @@
 import {useRef, useState, useEffect} from 'react';
-import useAuth from '../hooks/useAuth';
 import axios from '../api/axios';	
 import {useNavigate} from 'react-router-dom';
 
@@ -8,7 +7,6 @@ const LOGIN_URL = '/login';
 
 const Login = () => {
 	//Si l'utilisateur se loggue  avec succès, on va setAuth et le stocker dans le contexte global. 
-	const {setAuth} = useAuth()  //Le useAuth  utilise le AuthContext 
 	//le useRef pourra nous garder les valeurs modifiables sous la main et dans le temps. Ici, je vais surotut l'utiliser pour le focus 
 	const userRef = useRef(); 
 	const errRef = useRef();
@@ -40,9 +38,7 @@ const Login = () => {
 			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.access;
 			localStorage.setItem('access', accessToken)
-			const storedToken = localStorage.getItem('access')
-			const admin = response?.data?.admin; //Récupération du rôle du user  de la réponse json venant du back
-			setAuth({email, password, admin, storedToken}); //C'est ici que le AuthProvider commence à prendre place
+			//C'est ici que le AuthProvider commence à prendre place
 			setEmail('');
 			setPassword('');
 			navigate('/tableau-de-bord'); // Définition de la page vers laquelle va être redirigé l'utilisateur une fois authentifié avec succès

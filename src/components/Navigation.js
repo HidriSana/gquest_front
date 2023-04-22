@@ -15,9 +15,6 @@ const Navigation = () => {
             <p>Bonjour {user.firstname}</p> {/*Affichage de l'utilisateur récupéré du jeton*/}   
             <a href="/" onClick={() => localStorage.removeItem('access')}>Se déconnecter</a>
             <ul className="nav">
-                <NavLink to="/">
-                    <li>Accueil</li>
-                </NavLink>
                 <NavLink to="/tableau-de-bord">
                     <li>Tableau de  bord</li>
                 </NavLink>

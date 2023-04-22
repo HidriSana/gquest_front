@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 import CreateQuest from '../components/CreateQuest';
+import Membership from '../components/Membership';
 
 
 const Administration = () => {
@@ -9,6 +10,7 @@ const Administration = () => {
             <Navigation/>
             <h1>Administration</h1>
             <CreateQuest/>
+            <Membership/>
         </div>
     );
 };
