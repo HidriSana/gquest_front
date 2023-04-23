@@ -1,0 +1,59 @@
+@import './variables/variables.scss';
+
+.quests {
+    display: flex;
+    flex-wrap: wrap;
+    padding:1rem;
+    background-color: $mainBackground;
+    color: $mainBackground;
+    font-size: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin-right: 20px;
+    margin-left: 20px;
+    flex-grow: inherit;
+}
+
+.quest {
+    display:block;
+    background-color: white;
+    color: $mainBackground;
+    margin-bottom: 5%;
+    width: 48%;
+    min-height: 100vh;
+    border-radius: 0.5rem;
+    
+}
+.questCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px grey solid;
+    border-radius: 0.5rem;
+    padding: 2px;
+    margin: 2px;
+    background-color: lightgrey;
+}
+.questCard button {
+    background-color: lightgreen;
+    border-radius: 0.5rem;
+}
+
+.pendingQuest {
+    color: yellow;
+    text-shadow: 0px 0px 2px black;
+}
+.pendingQuest button {
+    background-color: lightgreen;
+}
+
+.questInProgress {
+ color: $questInProgress;
+ text-shadow: 0px 0px 2px black;
+}
+
+.finishedQuest {
+ color: $finishedQuest;
+ text-shadow: 0px 0px 2px black;
+}
+

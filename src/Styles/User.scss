@@ -1,0 +1,100 @@
+@import './variables/variables.scss';
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+    margin-right: 10%;
+    margin-left: 10%;
+    min-height: 100vh;
+}
+.user a {
+    color: white;
+    margin-bottom: 2rem;
+}
+.user a:hover {
+    color: $clickedLink;
+}
+
+.user p {
+    text-align: center;
+    border: 1px white dashed;
+    border-radius: 1rem;
+    padding: 1rem
+}
+
+.user a button {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 3rem;
+    height: 200px;
+    width: 300px;
+    font-size: 2rem;
+    
+}
+
+.user a button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+    background-color: $clickedLink;
+  }
+  
+  .instructions {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(178, 34, 34, 0.2);
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+    margin-bottom: 1rem;
+  }
+  
+  .instructions > svg {
+    margin-right: 0.25rem;
+    width: 100%
+  }
+  
+  .offscreen {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .show {
+    display: default;
+  }
+  
+  .valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+  }
+  
+  .invalid {
+    color: red;
+    margin-left: 0.25rem;
+  }
+  
+  .error{
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    font-family: $playerFont;
+    text-align: center;
+  }
+  
+  .line {
+    display: inline-block;
+  }
+  
+  .info {
+    background-color: $mainBackground;
+    border: none;
+  }

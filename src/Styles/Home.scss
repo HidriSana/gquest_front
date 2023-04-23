@@ -5,6 +5,9 @@
     flex-direction: column;
     align-items: center;
     padding-top: 0.5rem;
+    margin-right: 10%;
+    margin-left: 10%;
+    min-height: 100vh;
 }
 .home h2 {
     font-size: 1rem;
@@ -14,11 +17,7 @@
 .home>*{
     margin-bottom: 2rem;
 }
-.main-title {
-    font-family: $playerFont;
-    font-size: 5rem;
-    color: $gquestYellow;
-}
+
 .hero {
     display: flex;
     flex-direction: row;

@@ -11,9 +11,11 @@ const Navigation = () => {
 
     return (
        <div className="navbar">
-            <a className="main-title" href="/">GQUEST</a>
-            <p>Bonjour {user.firstname}</p> {/*Affichage de l'utilisateur récupéré du jeton*/}   
-            <a href="/" onClick={() => localStorage.removeItem('access')}>Se déconnecter</a>
+            <h1 className="main-title">GQUEST</h1>
+            <div>
+                <p>Bonjour {user.firstname}</p> {/*Affichage de l'utilisateur récupéré du jeton*/}   
+                <p><a className="disconnect" href="/" onClick={() => localStorage.removeItem('access')}>Se déconnecter</a></p>
+            </div>
             <ul className="nav">
                 <NavLink to="/tableau-de-bord">
                     <li>Tableau de  bord</li>

@@ -19,6 +19,12 @@ const acceptRequest = async (demand) => {
     .then(() => axios.get('http://localhost:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
     .then((res) => setData(res.data)))
 }
+
+const refuseRequest = async (demand) => {
+    axios({method: 'put', url:'/refuse-request', headers: {'Authorization': "Bearer " + localStorage.getItem('access')}, data: demand}) 
+    .then(() => axios.get('http://localhost:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
+    .then((res) => setData(res.data)))
+}
     return (
         <div>
             <h2>Demandes d'adhésion</h2>
@@ -29,7 +35,7 @@ const acceptRequest = async (demand) => {
                     <div key={index}>
                         <p>{(demand.user.firstname)} {(demand.user.lastname)} vous a envoyé une demande d'adhésion</p>
                         <button onClick={(e) => acceptRequest(demand)}>Accepter la demande</button>
-                        <button>Refuser la demande</button>
+                        <button onClick={(e) => refuseRequest(demand)}>Refuser la demande</button>
                     </div>
                 ))}
                     

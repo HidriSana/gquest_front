@@ -1,0 +1,27 @@
+@import './variables/variables.scss';
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding:1rem;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: white;
+    color: $mainBackground;
+    font-size: 1rem;
+    gap: 10px 50px;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+.dashboard a {
+    color: $mainBackground;
+}
+
+.dashboard p {
+    margin-left: 0;
+    width: 80%;
+}
+h2 {
+    text-align: center;
+}

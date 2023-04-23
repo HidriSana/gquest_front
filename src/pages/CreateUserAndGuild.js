@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
 import axios from '../api/axios'; //axios a déjà été importé de sa dépendance dans axios.js--> Voir dossier api.   
-import Navigation from '../components/Navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";//C'est une dépendance à installer à part. Vous pouvez la consulter dans la documentation officielle de React
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"; //Je n'importe que les icones dont j'ai besoin ici
+import { faCheck, faTimes} from "@fortawesome/free-solid-svg-icons"; //Je n'importe que les icones dont j'ai besoin ici
+import '../Styles/User.scss';
 
 //Même si j'ai défini les règles de validation sur Sequelize , il est de bonne pratique, de poser également des contraintes sur le front, afin que l'utilistauer ait un message d'erreur , avant même qu'il ne clique sur Submit
 const USER_REGEX = /^[A-zÀ-ú]{2,30}$/ ; //-> Regex pour autoriser les noms et prénom avec accents, et en limiter la longueur
@@ -128,8 +128,8 @@ const CreateUser = () => {
 			</section>
 		) :(
 
-        <section>
-			<Navigation/>
+        <section className='user'>
+			<h1 className="main-title">GQUEST</h1>
 			<p ref={errRef} className= {error ? "error" : "offscreen"} aria-live = "assertive">{error}</p>
             <form onSubmit={handleSubmit}>
 				<fieldset>
@@ -150,7 +150,6 @@ const CreateUser = () => {
 									onBlur= {() => setLastnameFocus(false)}
 							/>
 							<p id="lastnamenote" className={lastnameFocus && lastname && !validLastname ? "instructions" : "offscreen"}>
-								<FontAwesomeIcon icon={faInfoCircle} />
 								Votre nom ne doit pas contenir de nombres.
 								Sa longueur doit ête comprise entre  2 et  30 caractères.
 							</p>
@@ -171,11 +170,9 @@ const CreateUser = () => {
 									onBlur= {() => setFirstnameFocus(false)}
 							/>
 							<p id="firstnamenote" className={firstnameFocus && firstname && !validFirstname ? "instructions" : "offscreen"}>
-								<FontAwesomeIcon icon={faInfoCircle} />
 								Votre prénom ne doit pas contenir de nombres.
 								Sa longueur doit ête comprise entre  2 et  30 caractères.
 							</p>
-						<div>
 							<label htmlFor="email">Email:
 								<FontAwesomeIcon icon={faCheck} className={validEmail? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"}/>
@@ -193,11 +190,9 @@ const CreateUser = () => {
 									onBlur= {() => setEmailFocus(false)} 
 							/>
 							<p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
-								<FontAwesomeIcon icon={faInfoCircle} />
 								Vous devez saisir un format d'adresse mail valide.
 							</p>
-						</div>
-						<div>
+						
 							<label htmlFor="password">Mot de passe:
 								<FontAwesomeIcon icon={faCheck} className={validPassword? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validPassword || !password ? "hide" : "invalid"}/>
@@ -213,12 +208,11 @@ const CreateUser = () => {
 									onBlur={() => setPasswordFocus(false)}
 							/>
 							<p id="passworddnote" className={passwordFocus && !validPassword ? "instructions" : "offscreen"}>
-								<FontAwesomeIcon icon={faInfoCircle} />
 								Le mot de passe doit contenir 8 caractères au minimum, 12 au maximum, incluant au moins une majuscule, un chiffre et un caractère spécial.   
 							</p>
-						</div>
-                        <p>En définissant le  nom de votre guilde, vous en serez automatiquement l'administrateur à la validation de votre inscription. Vous pourrez changer cela dans les paramètres de la section "administration"</p>
-                        <label htmlFor="guild">Guilde:
+							
+                        
+                        	<label htmlFor="guild">Guilde:
 								<FontAwesomeIcon icon={faCheck} className={validGuild? "valid" : "hide"} />
 								<FontAwesomeIcon icon={faTimes} className={validGuild || !guild ? "hide" : "invalid"}/>
 							</label>
@@ -227,6 +221,7 @@ const CreateUser = () => {
 									value={guild} 
 									ref={userRef} 
 									onChange={(e) => setGuild(e.target.value)} 
+									autoComplete='off'
 									required
 									aria-invalid={validGuild? "false" : "true"}
 									aria-describedby="guildnote"
@@ -234,23 +229,22 @@ const CreateUser = () => {
 									onBlur= {() => setGuildFocus(false)}
 							/>
 							<p id="guildnote" className={guildFocus && guild && !validGuild ? "instructions" : "offscreen"}>
-								<FontAwesomeIcon icon={faInfoCircle} />
 								Le nom de guilde ne peut contenir de caractères spéciaux.
 								Sa longueur doit ête comprise entre  3 et  30 caractères.
 							</p>
-				
+							<p className={guildFocus? "info" : "offscreen"}>En définissant le  nom de votre guilde, vous en serez automatiquement l'administrateur à la validation de votre inscription. Vous pourrez changer cela dans les paramètres de la section "administration"</p>
+						<button disabled={!validEmail || !validPassword || !validLastname || !validFirstname || !validGuild ? true : false}>
+							Créer mon compte
+						</button>
 
                         
 				</fieldset>
 				
-				<button disabled={!validEmail || !validPassword || !validLastname || !validFirstname || !validGuild ? true : false}>
-						Créer mon compte
-				</button>
                 <p>
 					<a href="/create-user-find-guild">J'ai déjà une guilde</a>
 				</p>
 				<p>
-					<a href="/login">J'ai déjà un compte</a>
+					<a href="/">J'ai déjà un compte</a>
 				</p>
 			</form>
         </section>

@@ -16,3 +16,15 @@ $lowerOpacityBlack: rgba(0, 0, 0, 0.4);
 $gquestFont: 'DynaPuff', cursive;
 $playerFont: 'Press Start 2P', cursive;
 $clickedLink: #f59a9b;
+$mainBackground: #373737;
+$questInProgress: orange;
+$finishedQuest: green;
+
+                                  /********************Breakpoints******************/
+
+$breakpoints: (
+    "sm": 480px,
+    "md": 720px,
+    "lg": 920px
+);
+

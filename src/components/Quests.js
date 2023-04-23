@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 import headerConfig from '../config/Config';
 import decoder from '../config/TokenDecoder';
+import '../Styles/Quests.scss';
 
 const Quests = () => {
 
@@ -26,14 +27,14 @@ const finishQuest = async (quest) => {
     .then((res) => setData(res.data.data)))
 }
     return (
-        <section>
-           <div>
-                <h2>Quêtes en attente</h2>
+        <section className="quests">
+           <div className="quest">
+                <h2 className='pendingQuest'>Quêtes en attente</h2>
                 <div>
                     {data
                     .filter((quest)=> quest.status === 'en_attente')
                     .map((quest, i1) => (
-                        <div key={i1}>
+                        <div className="questCard" key={i1}>
                             <p>{quest.description}</p>
                             <p>Temps nécessaire estimé: {quest.duration} min</p>
                             <p>Cette quête rapporte {quest.points} point(s)</p>
@@ -43,13 +44,13 @@ const finishQuest = async (quest) => {
                     
                 </div>
            </div>  
-           <div>
-                <h2>Quêtes en cours</h2>
-                <div>
+           <div className="quest">
+                <h2 className='questInProgress'>Quêtes en cours</h2>
+                <div >
                     {data
                     .filter((quest)=> quest.status === 'en_cours')
                     .map((quest, i2) => (
-                        <div key={i2}>
+                        <div className="questCard" key={i2}>
                             <p>{quest.description}</p>
                             <p>Temps nécessaire estimé: {quest.duration} min</p>
                             <p>Cette quête rapporte {quest.points} point(s)</p>
@@ -59,13 +60,13 @@ const finishQuest = async (quest) => {
                     ))}
                 </div>
            </div>  
-           <div>
-                <h2>Quêtes terminées</h2>
-                <div>
+           <div className="quest">
+                <h2 className='finishedQuest'>Quêtes terminées</h2>
+                <div >
                     {data
                     .filter((quest)=> quest.status === 'terminée')
                     .map((quest, i3) => (
-                        <div key={i3}>
+                        <div className="questCard" key={i3}>
                             <p>{quest.description}</p>
                             <p>{quest.user.firstname} a fini cette quête</p>
                         </div>

@@ -15,27 +15,19 @@ html {
 /* Body */
 body { 
     font-size: 1.6rem;
-    min-height: 100vh;
-    background-color: #373737;
+    background-color: $mainBackground;
 }
-
 /* Main container */
 .App {
 display: flex;
 flex-direction: column;
-align-items: center;
-min-height: 100vh; 
+align-items: center; 
 max-width: 980px;
-margin-left: 5%;
-margin-right: 5%;
+font-family: $playerFont;
 }
 
 section {
-  width: 100%;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  max-width: 480px;
   padding: 0.5rem;
   background-color: rgba(0,0,0,0.4);
 }
@@ -43,45 +35,47 @@ form{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
   border-radius: 1rem ;
 }
 fieldset {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
   border-radius: 1rem ;
 }
 
 fieldset legend {
   color: lightgrey;
-  font-family:$playerFont;
+  text-align: center;
 }
 
 
 a {
   text-decoration:none;
 }
+a:hover {
+  color: $clickedLink;
+}
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea {
+input {
 font-family: $playerFont;
 font-size: 1.5rem;
 padding: 1rem;
 border-radius: 1rem;
+margin-bottom: 1rem;
+width : 100%;
  }
 input::placeholder{
   color:lightgray;
 }
 
 label{
-margin-top: 1rem;
 font-family:$playerFont;
 padding: 1rem;
 }
+
 form button {
 padding: 1rem;
 margin-top: 2rem;
@@ -96,52 +90,9 @@ form button:hover {
 li{
  list-style: none;
 }
-
-.instructions {
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  padding: 0.25rem;
-  position: relative;
-  bottom: -10px;
-}
-
-.instructions > svg {
-  margin-right: 0.25rem;
-}
-
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: default;
-}
-
-.valid {
-  color: limegreen;
-  margin-left: 0.25rem;
-}
-
-.invalid {
-  color: red;
-  margin-left: 0.25rem;
-}
-
-.error{
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.line {
-  display: inline-block;
+ 
+.main-title {
+  font-family: $playerFont;
+  font-size: 5rem;
+  color: $gquestYellow;
 }
