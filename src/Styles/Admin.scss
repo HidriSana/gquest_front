@@ -1,0 +1,29 @@
+@import './variables/variables.scss';
+
+.admin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding:1rem;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: white;
+    color: $mainBackground;
+    font-size: 1rem;
+    gap: 10px 50px;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.demand {
+    border: 1px grey solid;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.demand button {
+    width:48%;
+    margin:1%;
+}
+

@@ -33,6 +33,7 @@ const CreateQuest = () => {
 	}
     return (
         <section>
+            <h2>Nouvelle quête</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="description">
                     Description de la quête:

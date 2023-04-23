@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import axios from '../api/axios';
 import decoder from '../config/TokenDecoder';
 import headerConfig from '../config/Config';
+import '../Styles/Admin.scss';
 
 
 const Membership = () => {
@@ -28,7 +29,7 @@ const refuseRequest = async (demand) => {
     return (
         <div>
             <h2>Demandes d'adhésion</h2>
-            <div>
+            <div className="demand">
                 {data
                 .filter((demand)=> demand.status === 'Pending')
                 .map((demand, index) => (

@@ -59,7 +59,7 @@ const Login = () => {
 	}
    //En ce qui concerne les balises <section></section>, elles remplacent  les div par défaut de REACT  pour la sémantique
 	return (
-			<section>
+			<section className='login'>
 				<p ref={errRef} className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
 				<form onSubmit={handleSubmit} >
 						

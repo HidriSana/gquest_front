@@ -2,15 +2,18 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import CreateQuest from '../components/CreateQuest';
 import Membership from '../components/Membership';
+import '../Styles/Home.scss';
 
 
 const Administration = () => {
     return (
-        <div>
+        <div >
             <Navigation/>
-            <h1>Administration</h1>
-            <CreateQuest/>
-            <Membership/>
+            <h2>Administration</h2>
+            <div className='admin'>
+                <CreateQuest/>
+                <Membership/>
+            </div>
         </div>
     );
 };
