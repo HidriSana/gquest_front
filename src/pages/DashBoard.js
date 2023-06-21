@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Quests from '../components/Quests';
 import '../Styles/Dashboard.scss';
@@ -16,7 +17,7 @@ const dashBoard = () => {
                 <p>Expérience cumulée: 526 points</p>
                 <p> Vous avez 1 quête(s) en cours(expire dans 18h et 45 minutes)</p>
                 <p>Vous avez fini 9 quête(s) cette semaine.</p>
-                <p><a href="/#">Voir le tableau des récompenses</a></p>
+                <p><Link to="/#">Voir le tableau des récompenses</Link></p>
             </div>
             {/*L'affichage des quêtes*/}
             <Quests/>

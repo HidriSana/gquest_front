@@ -17,7 +17,7 @@ const CreateQuest = () => {
 				{
 					headers: {'Content-Type': 'application/json','Authorization': "Bearer " + localStorage.getItem('access') },
 				});
-				console.log(response?.data);
+				
 				console.log(JSON.stringify(response));
 				setDescription('')
 				setDuration('');
@@ -25,9 +25,9 @@ const CreateQuest = () => {
 				
 			} catch (err) {
 				if(err.response?.status === 500) {
-					console.log('Le serveur ne répond pas')
+					
 				} else {
-                    console.log("La quête n'a pas pu être créée")
+                   
                 }
 		}
 	}

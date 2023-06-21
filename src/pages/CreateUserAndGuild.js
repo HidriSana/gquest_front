@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from '../api/axios'; //axios a déjà été importé de sa dépendance dans axios.js--> Voir dossier api.   
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";//C'est une dépendance à installer à part. Vous pouvez la consulter dans la documentation officielle de React
 import { faCheck, faTimes} from "@fortawesome/free-solid-svg-icons"; //Je n'importe que les icones dont j'ai besoin ici
@@ -47,8 +48,6 @@ const CreateUser = () => {
 	//C'est là qu'interviendra  le regex défini plus haut, dès que l'utilistaeur écrit quelque chose dans le champ email
 	useEffect (() => {
 		const result = EMAIL_REGEX.test(email);
-		console.log(result);
-		console.log(email);
 		setValidEmail(result);
 	}, [email])
     
@@ -97,7 +96,6 @@ const CreateUser = () => {
 				{
 					headers: {'Content-Type': 'application/json' },
 				});
-				console.log(response?.data);
 				console.log(JSON.stringify(response));
 				setSuccess(true);
 				setLastname('');
@@ -241,10 +239,10 @@ const CreateUser = () => {
 				</fieldset>
 				
                 <p>
-					<a href="/create-user-find-guild">J'ai déjà une guilde</a>
+					<Link href="/create-user-find-guild">J'ai déjà une guilde</Link>
 				</p>
 				<p>
-					<a href="/">J'ai déjà un compte</a>
+					<Link href="/">J'ai déjà un compte</Link>
 				</p>
 			</form>
         </section>

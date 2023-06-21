@@ -1,6 +1,6 @@
 import {useRef, useState, useEffect} from 'react';
 import axios from '../api/axios';	
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 
 const LOGIN_URL = '/login';
@@ -35,7 +35,6 @@ const Login = () => {
 				{
 					headers: {'Content-Type': 'application/json' },
 				})
-			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.access;
 			localStorage.setItem('access', accessToken)
 			//C'est ici que le AuthProvider commence à prendre place
@@ -88,7 +87,7 @@ const Login = () => {
 						<button>Connexion</button>
 					</fieldset>
 					<p className="subscribe">
-						<a href="/createuser">Je veux m'inscrire</a>
+						<Link to="/createuser">Je veux m'inscrire</Link>
 					</p>
 				</form>
 			</section>

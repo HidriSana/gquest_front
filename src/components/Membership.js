@@ -9,7 +9,7 @@ const Membership = () => {
     const [data, setData] = useState([])
 
 useEffect (() => {
-    axios({method: 'get', url:'http://localhost:5000/find-request/'+ decoder.guildDecoder(), headers: {'Authorization': "Bearer " + localStorage.getItem('access')}})
+    axios({method: 'get', url:'http://gquest.fr:5000/find-request/'+ decoder.guildDecoder(), headers: {'Authorization': "Bearer " + localStorage.getItem('access')}})
     .then((res) => 
     setData(res.data)
     )
@@ -17,13 +17,13 @@ useEffect (() => {
 
 const acceptRequest = async (demand) => {
     axios({method: 'put', url:'/accept-request', headers: {'Authorization': "Bearer " + localStorage.getItem('access')}, data: demand}) 
-    .then(() => axios.get('http://localhost:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
+    .then(() => axios.get('http://gquest.fr:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
     .then((res) => setData(res.data)))
 }
 
 const refuseRequest = async (demand) => {
     axios({method: 'put', url:'/refuse-request', headers: {'Authorization': "Bearer " + localStorage.getItem('access')}, data: demand}) 
-    .then(() => axios.get('http://localhost:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
+    .then(() => axios.get('http://gquest.fr:5000/find-request/'+ decoder.guildDecoder(),headerConfig)
     .then((res) => setData(res.data)))
 }
     return (

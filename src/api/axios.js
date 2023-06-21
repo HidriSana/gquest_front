@@ -3,6 +3,6 @@ import axios from 'axios' ; //Axios pour la liaison avec la bdd.
 
 //baseUrl va me permettre de ne pas avoir à réécrire à chaque fois le localhost et le port de l'api
 export default axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'http://gquest.fr:5000'
 })
 
